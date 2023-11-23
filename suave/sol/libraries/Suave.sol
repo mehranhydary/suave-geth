@@ -155,8 +155,8 @@ library Suave {
         return data;
     }
 
-    function getBlockNumber() internal view returns (uint64) {
-        (bool success, bytes memory data) = GET_BLOCK_NUMBER.staticcall(abi.encode());
+    function getBlockNumber(string memory rpcUrl) internal view returns (uint64) {
+        (bool success, bytes memory data) = GET_BLOCK_NUMBER.staticcall(abi.encode(rpcUrl));
         if (!success) {
             revert PeekerReverted(GET_BLOCK_NUMBER, data);
         }

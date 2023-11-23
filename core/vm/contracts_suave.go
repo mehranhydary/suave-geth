@@ -134,6 +134,6 @@ type suaveRuntime struct {
 
 var _ SuaveRuntime = &suaveRuntime{}
 
-func (s *suaveRuntime) getBlockNumber() (uint64, error) {
-	return s.suaveContext.Backend.ConfidentialEthBackend.BlockNumber()
+func (s *suaveRuntime) getBlockNumber(rpcUrl string) (uint64, error) {
+	return s.suaveContext.Backend.ConfidentialEthBackend.BlockNumber(rpcUrl)
 }

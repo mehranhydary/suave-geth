@@ -87,8 +87,8 @@ library SuaveForge {
         return data;
     }
 
-    function getBlockNumber() internal view returns (uint64) {
-        bytes memory data = forgeIt("0x0000000000000000000000000000000543200001", abi.encode());
+    function getBlockNumber(string memory rpcUrl) internal view returns (uint64) {
+        bytes memory data = forgeIt("0x0000000000000000000000000000000543200001", abi.encode(rpcUrl));
 
         return abi.decode(data, (uint64));
     }

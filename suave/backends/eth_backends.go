@@ -20,7 +20,7 @@ var (
 
 type EthMock struct{}
 
-func (e *EthMock) BlockNumber() (uint64, error) {
+func (e *EthMock) BlockNumber(rpcUrl string) (uint64, error) {
 	return 0, nil
 }
 
@@ -75,8 +75,10 @@ func (e *RemoteEthBackend) call(ctx context.Context, result interface{}, method 
 	return nil
 }
 
-func (e *RemoteEthBackend) BlockNumber() (uint64, error) {
-	client, err := rpc.DialContext(context.Background(), e.endpoint)
+func (e *RemoteEthBackend) BlockNumber(rpcUrl string) (uint64, error) {
+	// Instead of passing in e.endpoint, we pass in rpcUrl since we get it
+	// from the Solidity code instead of the config file (we want it dynamic)
+	client, err := rpc.DialContext(context.Background(), rpcUrl)
 	if err != nil {
 		return 0, err
 	}
